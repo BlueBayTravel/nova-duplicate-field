@@ -43,11 +43,15 @@ class DuplicateController extends Controller
             }
         }
 
+        $basePath = config('nova.path') === '/' ?
+            config('app.url') :
+            config('nova.path');
+
         // return response and redirect.
         return [
             'status' => 200,
             'message' => 'Done',
-            'destination' => url(config('nova.path') . '/resources/' . $request->resource . '/' . $newModel->id)
+            'destination' => url($basePath . '/resources/' . $request->resource . '/' . $newModel->id)
         ];
     }
 }
